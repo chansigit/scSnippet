@@ -40,7 +40,8 @@ my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.
     color = group.by, 
     palette = c('#a6cee3','#1f78b4','#b2df8a','#33a02c',
                 '#fb9a99','#e31a1c','#fdbf6f','#ff7f00',
-                '#cab2d6','#6a3d9a','#ffff99','#b15928' ) )  + 
+                '#cab2d6','#6a3d9a','#ffff99','#b15928',
+                '#980043','#02818a','#00441b','#984ea3') )  + 
   guides(colour = guide_legend(override.aes = list(size=5)))+ # legend dot size
   theme(legend.position = "bottom", # legend themes
         legend.title    = element_text(color = "blue", size = 10),
