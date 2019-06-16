@@ -38,14 +38,15 @@ my_heatmap<-function(object, genes, slot="scale.data",
   ha <- HeatmapAnnotation(identity= cell.identity.ordered, col=list(identity=colors.used))
     
   # draw heatmap
-  hm <- Heatmap(dge,
+    require(circlize)
+  hm <- Heatmap(dge, col=colorRamp2(c(-3, 0, 3), c("#FF08BD", "#000000", "#FFF42F")),
               cluster_rows=FALSE, cluster_columns = FALSE, 
               show_column_names=FALSE,
               top_annotation = ha)
   draw(hm, heatmap_legend_side = "right")
 }
 
-options(repr.plot.width=21,repr.plot.height=17,repr.plot.resolution=500)
+options(repr.plot.width=22,repr.plot.height=18,repr.plot.resolution=400)
 my_heatmap(ASI, genes=markers, given.identity.order=NULL, group.by = "RNA_snn_res.0.7")
 
 # see here for more info
