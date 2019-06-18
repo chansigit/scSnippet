@@ -1,10 +1,10 @@
-my_heatmap<-function(object, genes, slot="scale.data", 
+my_heatmap<-function(object, genes, slot="scale.data", annotation_height=1,
                      group.by="RNA_snn_res.0.5", given.identity.order=NULL){
   require(ComplexHeatmap)  
   # filter undetected genes out
   gene.all  <- rownames(GetAssayData(object = object, slot = slot))
-  gene.use  <- intersect(markers, gene.all)
-  gene.miss <- setdiff  (markers, gene.all)
+  gene.use  <- intersect(genes, gene.all)
+  gene.miss <- setdiff  (genes, gene.all)
   warning(paste("Genes not found: ", paste(gene.miss,collapse="  ")))
     
   # transform sparse matrix into matrix
@@ -36,7 +36,9 @@ my_heatmap<-function(object, genes, slot="scale.data",
                  '#cab2d6','#6a3d9a','#ffff99','#b15928',
                  '#980043','#02818a','#00441b','#984ea3')[1:length(identities)]
   names(colors.used)<-identities
-  ha <- HeatmapAnnotation(identity= cell.identity.ordered, col=list(identity=colors.used))
+  ha <- HeatmapAnnotation(identity= cell.identity.ordered, 
+                          col     =list(identity=colors.used),
+                          annotation_height  = unit(annotation_height, "cm"))
     
   # draw heatmap
   require(circlize)
