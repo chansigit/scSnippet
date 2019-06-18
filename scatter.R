@@ -1,13 +1,11 @@
-my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.size=0.1,
+my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.size=0.1, label.pt.size=5,
                            label.size=10, label.face="plain",label.rectangle=FALSE, ...){   
   # 1. bind dimensionality reduction info with metainfo
   meta_dr <- cbind( object[[]], Embeddings(object = object, reduction = reduction))
   
-  # 2. bind barcode info stored in rownames in case of getting lost when rownames were discarded
-  meta_dr <- cbind("barcode"=rownames(meta_dr), meta_dr) 
-  meta_dr <- meta_dr[order(meta_dr[,group.by], meta_dr[,xcoord.name], meta_dr[,ycoord.name]) , ]
-  
-  # 3. choose dimensionality reduction name
+  # 2. choose dimensionality reduction name
+  xcoord.name<-""
+  ycoord.name<-""
   if (reduction=="umap"){
     xcoord.name<-"UMAP_1";ycoord.name<-"UMAP_2"
   }
@@ -17,6 +15,13 @@ my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.
   if (reduction=="pca"){
     xcoord.name<-"PC_1";  ycoord.name<-"PC_2"
   }
+    
+    
+  # 3. bind barcode info stored in rownames in case of getting lost when rownames were discarded
+  meta_dr <- cbind("barcode"=rownames(meta_dr), meta_dr) 
+  meta_dr <- meta_dr[order(meta_dr[,group.by], meta_dr[,xcoord.name], meta_dr[,ycoord.name]) , ]
+  
+  
 
   # 4. add text labels for each group
   for (identity in levels(as.factor(meta_dr[,group.by]))){
@@ -31,10 +36,9 @@ my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.
   }
     
   # 5. draw
-
   plot <- ggscatter(meta_dr, 
     x = xcoord.name, y = ycoord.name,    # x and y coordinates of points
-    size = pt.size,                          # scatter plot dot size
+    size = pt.size,                      # scatter plot dot size
     ellipse = (contour==TRUE) , 
     label = "text_annotation",repel=TRUE,font.label = c(label.size, label.face, "black"),label.rectangle=label.rectangle,
     color = group.by, 
@@ -42,7 +46,7 @@ my_scatter_plot<- function(object, group.by, reduction="umap",contour=FALSE, pt.
                 '#fb9a99','#e31a1c','#fdbf6f','#ff7f00',
                 '#cab2d6','#6a3d9a','#ffff99','#b15928',
                 '#980043','#02818a','#00441b','#984ea3') )  + 
-  guides(colour = guide_legend(override.aes = list(size=5)))+ # legend dot size
+  guides(colour = guide_legend(override.aes = list(size=label.pt.size)))+ # legend dot size
   theme(legend.position = "bottom", # legend themes
         legend.title    = element_text(color = "blue", size = 10),
         legend.text     = element_text(color = "blue", size = 6))
