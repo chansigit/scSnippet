@@ -1,5 +1,6 @@
 my_heatmap<-function(object, genes, slot="scale.data", 
                      group.by="RNA_snn_res.0.5", given.identity.order=NULL){
+  require(ComplexHeatmap)  
   # filter undetected genes out
   gene.all  <- rownames(GetAssayData(object = object, slot = slot))
   gene.use  <- intersect(markers, gene.all)
@@ -38,14 +39,13 @@ my_heatmap<-function(object, genes, slot="scale.data",
   ha <- HeatmapAnnotation(identity= cell.identity.ordered, col=list(identity=colors.used))
     
   # draw heatmap
-    require(circlize)
+  require(circlize)
   hm <- Heatmap(dge, name=slot, col=colorRamp2(c(-3, 0, 3), c("#FF08BD", "#000000", "#FFF42F")),
               cluster_rows=FALSE, cluster_columns = FALSE, 
               show_column_names=FALSE,
               top_annotation = ha)
   draw(hm, heatmap_legend_side = "right")
 }
-
 options(repr.plot.width=24,repr.plot.height=18,repr.plot.resolution=600)
 my_heatmap(ASI, genes=markers, given.identity.order=NULL, group.by = "RNA_snn_res.0.7")
 
