@@ -5,7 +5,7 @@ my_heatmap<-function(object, genes, slot="scale.data", annotation_height=1,
   gene.all  <- rownames(GetAssayData(object = object, slot = slot))
   gene.use  <- intersect(genes, gene.all)
   gene.miss <- setdiff  (genes, gene.all)
-  warning(paste("Genes not found: ", paste(gene.miss,collapse="  ")))
+  warning(paste("Genes not found: ", paste(gene.miss,collapse="  "),"\n"))
     
   # transform sparse matrix into matrix
   dgeSparse <- GetAssayData(object = object, slot = slot)
