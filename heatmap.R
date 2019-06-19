@@ -22,7 +22,7 @@ my_heatmap<-function(object, genes, slot="scale.data", annotation_height=1,
     
     subgroup <- meta[meta[,group.by]==identity,  ] 
     bc       <- rownames(subgroup)
-    cell.identity.ordered <- c(cell.identity.ordered, as.character(subgroup[,group.by])) # convert to character, or it wrongly convert 0 to 1 due to factors
+    cell.identity.ordered <- c(cell.identity.ordered, as.character(subgroup[,group.by])) # convert to character, or it wrongly convert 0 to 1 due to thr factor datatype
     cell.barcode.order    <- c(cell.barcode.order, bc)
     
   }
@@ -48,8 +48,3 @@ my_heatmap<-function(object, genes, slot="scale.data", annotation_height=1,
               top_annotation = ha)
   draw(hm, heatmap_legend_side = "right")
 }
-options(repr.plot.width=24,repr.plot.height=18,repr.plot.resolution=600)
-my_heatmap(ASI, genes=markers, given.identity.order=NULL, group.by = "RNA_snn_res.0.7")
-
-# see here for more info
-# https://jokergoo.github.io/ComplexHeatmap-reference/book/a-single-heatmap.html#clustering
