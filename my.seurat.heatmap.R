@@ -54,7 +54,7 @@ my.seurat.heatmap<-function(object, genes, slot="scale.data",
     # ==========================================================================
     # build heatmap annotations
     identities<-unique(given.identity.order)
-    colors.used<-palette[1:length(identities)]
+    colors.used<-identity.palette[1:length(identities)]
     names(colors.used)<-identities
     ha <- HeatmapAnnotation(identity= cell.identity.ordered, 
                             col     =list(identity=colors.used),
