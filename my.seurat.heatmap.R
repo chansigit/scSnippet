@@ -64,7 +64,9 @@ my.seurat.heatmap<-function(object, genes, slot="scale.data",
     # ========================================================================== 
     # draw heatmap
     require(circlize)
-    hm <- Heatmap(dge, name=slot, col=colorRamp2(c(-2, 0, 2), c("#FF08BD", "#000000", "#FFF42F")),
+    hm <- Heatmap(dge, name=slot, 
+    	        col=colorRamp2(c(hm.color.lb, 0, hm.color.ub),
+    	                       c(hm.color.lower, hm.color.mid, hm.color.upper)),
                 cluster_rows=FALSE, cluster_columns = FALSE, 
                 show_column_names=FALSE,
                 top_annotation = ha, ...)
