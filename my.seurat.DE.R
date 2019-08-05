@@ -16,7 +16,11 @@ my.seurat.FindAllMarkers <-function(object, identity="RNA_snn_res.0.5", name="sa
     markers.sig["abs_avg_logFC"] <-     abs(      markers.sig["avg_logFC"]          )
     markers.sigpos               <- markers.sig[  markers.sig$"avg_logFC">0,        ]
     markers.signeg               <- markers.sig[  markers.sig$"avg_logFC"<0,        ]
-  
+    
+    markers.sig    <- markers.sig[   order(markers.sig$cluster,    -markers.sig$abs_avg_logFC), ]
+    markers.sigpos <- markers.sigpos[order(markers.sigpos$cluster, -markers.sigpos$avg_logFC) , ]
+    markers.signeg <- markers.signeg[order(markers.signeg$cluster,  markers.signeg$avg_logFC) , ]
+
     # 2. store all marker genes to file 
     fp_allmarkerlist <- paste0(outpath.prefix, 
                                "/DEG.", name, ".", identity, "_", 
