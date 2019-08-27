@@ -77,7 +77,7 @@ my.seurat.DEGplot <- function(object, DE.result, w, h, outpath.prefix,
   tic("rendering")
   pdf(fp, width=w, height=h)
   my.seurat.heatmap(object, genes=markers.sig.top$gene, given.identity.order=given.identity.order, 
-             annotation_height=2, group.by = identity)
+             annotation_height=2, group.by = identity,...)
   dev.off()
   toc()
 
@@ -88,7 +88,7 @@ my.seurat.DEGplot <- function(object, DE.result, w, h, outpath.prefix,
   tic("rendering")
   pdf(fp, width=w, height=h)
   my.seurat.heatmap(object, genes=markers.sigpos.top$gene, given.identity.order=given.identity.order, 
-             annotation_height=2, group.by = identity)
+             annotation_height=2, group.by = identity,...)
   dev.off()
   toc()
 
@@ -99,7 +99,7 @@ my.seurat.DEGplot <- function(object, DE.result, w, h, outpath.prefix,
   tic("rendering")
   pdf(fp, width=w, height=h)
   my.seurat.heatmap(object, genes=markers.signeg.top$gene, given.identity.order=given.identity.order, 
-             annotation_height=2, group.by = identity)
+             annotation_height=2, group.by = identity,...)
   dev.off()
   toc()
 
