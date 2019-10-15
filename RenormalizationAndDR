@@ -10,7 +10,8 @@ seu <- ScaleData(seu,  features=rownames(seu),vars.to.regress = "nCount_RNA", bl
 plan("sequential")
 
 seu <- RunPCA(seu,  npcs=50, features=VariableFeatures(object=seu),  verbose = FALSE)
-seu <- RunUMAP(object=seu,  dims=1:30, verbose=FALSE, min.dist=0.5, n.neighbors = 30L)
+# seu <- RunUMAP(object=seu,  dims=1:30, verbose=FALSE, min.dist=0.5, n.neighbors = 30L) # uwot in seurat3.1 is problematic
+seu <- RunUMAP(object=seu,  dims=1:30, verbose=FALSE, min.dist=0.5, n.neighbors = 30L, umap.method = "umap-learn", metric = "correlation")
 seu <- RunTSNE(object=seu,  dims=1:30, verbose=FALSE, perplexity=60)
 toc()
 
