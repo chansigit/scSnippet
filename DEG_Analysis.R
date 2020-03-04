@@ -12,6 +12,11 @@ markers <- markers[ markers$p_val_adj<0.01, ]
 markers <- markers[ order(markers$cluster, -markers$avg_logFC), ]
 
 # Annotate
+## load gene list from github (THIS IS FOR MOUSE)
+load(url("https://github.com/chansigit/SSAT/raw/master/mm.cellsurfacemarker.rda"))
+load(url("https://github.com/chansigit/SSAT/raw/master/mm.secretory.rda"))
+load(url("https://github.com/chansigit/SSAT/raw/master/mm.tf.rda"))
+## load annotation functions
 source("https://raw.github.com/chansigit/SSAT/master/annotate.genelist.R")
 annotate.genelist(markers, tf=mm.tf, surface=mm.cellsurfacemarker, secretory=mm.secretory)
 
