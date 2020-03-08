@@ -18,7 +18,7 @@ load(url("https://github.com/chansigit/SSAT/raw/master/mm.secretory.rda"))
 load(url("https://github.com/chansigit/SSAT/raw/master/mm.tf.rda"))
 ## load annotation functions
 source("https://raw.github.com/chansigit/SSAT/master/annotate.genelist.R")
-annotate.genelist(markers, tf=mm.tf, surface=mm.cellsurfacemarker, secretory=mm.secretory)
+markers<-annotate.genelist(markers, tf=mm.tf, surface=mm.cellsurfacemarker, secretory=mm.secretory)
 
 # Visualize
 library(devtools)
