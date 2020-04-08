@@ -1,5 +1,5 @@
 def writeToCsv(adata, project_name):
-    if isinstance(adata_filtered.layers["counts"], np.ndarray):
+    if isinstance(adata.layers["counts"], np.ndarray):
         counts_slot    = pd.DataFrame(data=adata.layers["counts"], index=adata.obs_names, columns=adata.var_names).T
         data_slot      = pd.DataFrame(data=adata.X,                index=adata.obs_names, columns=adata.var_names).T
         scaledata_slot = pd.DataFrame(data=adata.layers["scaled"], index=adata.obs_names, columns=adata.var_names).T
