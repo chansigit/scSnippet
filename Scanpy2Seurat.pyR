@@ -8,8 +8,8 @@ def writeToCsv(adata, project_name):
         data_slot      = pd.DataFrame(data=adata.X.toarray(),                index=adata.obs_names, columns=adata.var_names).T
         scaledata_slot = pd.DataFrame(data=adata.layers["scaled"],           index=adata.obs_names, columns=adata.var_names).T
     metadata       = adata.obs
-    embedding_pca  = adata.obsm["X_pca"]
-    embedding_umap = adata.obsm["X_umap"]
+    embedding_pca  = pd.DataFrame(data=adata.obsm["X_pca"], index=adata.obs_names)
+    embedding_umap = pd.DataFrame(data=adata.obsm["X_umap"], index=adata.obs_names)
     
     counts_slot.to_csv("%s.seu.counts_slot"%project_name,                 header=True, index=True, sep="\t", encoding='utf-8')
     data_slot.to_csv("%s.seu.data_slot"%project_name,                     header=True, index=True, sep="\t", encoding='utf-8')
@@ -17,25 +17,31 @@ def writeToCsv(adata, project_name):
     metadata.to_csv("%s.seu.metadata"%project_name,             header=True, index=True, sep="\t", encoding='utf-8')
     embedding_pca.to_csv("%s.seu.embedding_pca"%project_name,   header=True, index=True, sep="\t", encoding='utf-8')
     embedding_umap.to_csv("%s.seu.embedding_umap"%project_name, header=True, index=True, sep="\t", encoding='utf-8')
+    
 
-writeToCsv(adata , project_name="HdmCd45Neg-PP2")
+#################################################################################################
+#################################################################################################
+#################################################################################################
+tic()
+counts         <-as.matrix(read.table(file="200409-ABM2-totalclustered.seu.counts_slot",    sep="\t",header=T,row.names = 1,check.names=F))
+data           <-as.matrix(read.table(file="200409-ABM2-totalclustered.seu.data_slot",      sep="\t",header=T,row.names = 1,check.names=F))
+scale.data     <-as.matrix(read.table(file="200409-ABM2-totalclustered.seu.scaledata_slot", sep="\t",header=T,row.names = 1,check.names=F))
+meta.data      <-          read.table(file="200409-ABM2-totalclustered.seu.metadata",       sep="\t",header=T,row.names = 1,check.names=F)
+embedding_pca  <-as.matrix(read.table(file="200409-ABM2-totalclustered.seu.embedding_pca",  sep="\t",header=T,row.names = 1,check.names=F))
+embedding_umap <-as.matrix(read.table(file="200409-ABM2-totalclustered.seu.embedding_umap", sep="\t",header=T,row.names = 1,check.names=F))
+toc()
+
 
 tic()
-counts         <-as.matrix(read.table(file="HdmCd45Neg-PP2.seu.counts_slot",    sep="\t",header=T,row.names = 1,check.names=F))
-data           <-as.matrix(read.table(file="HdmCd45Neg-PP2.seu.data_slot",      sep="\t",header=T,row.names = 1,check.names=F))
-scale.data     <-as.matrix(read.table(file="HdmCd45Neg-PP2.seu.scaledata_slot", sep="\t",header=T,row.names = 1,check.names=F))
-meta.data      <-          read.table(file="HdmCd45Neg-PP2.seu.metadata",       sep="\t",header=T,row.names = 1,check.names=F)
-embedding_pca  <-as.matrix(read.table(file="HdmCd45Neg-PP2.seu.embedding_pca",  sep="\t",header=T,row.names = 1,check.names=F))
-embedding_umap <-as.matrix(read.table(file="HdmCd45Neg-PP2.seu.embedding_umap", sep="\t",header=T,row.names = 1,check.names=F))
-toc()
+seu<-CreateSeuratObject(counts=counts, project="ABM2ALP",meta.data = meta.data)
+seu<-SetAssayData(seu, slot="data", new.data = data) 
+seu<-SetAssayData(seu, slot="scale.data", new.data = scale.data)
+
 colnames(embedding_pca)  <-paste0("PC_",1:50)
 colnames(embedding_umap) <-paste0("UMAP_",1:2)
 rownames(embedding_pca)  <-rownames(seu[[]])
 rownames(embedding_umap) <-rownames(seu[[]])
-tic()
-seu<-CreateSeuratObject(counts=counts, project="HdmCd45Neg",meta.data = meta.data)
-seu<-SetAssayData(seu, slot="data", new.data = data) 
-seu<-SetAssayData(seu, slot="scale.data", new.data = scale.data)
+
 seu[["umap"]] <-CreateDimReducObject(embeddings = embedding_umap, key = "UMAP_", assay = DefaultAssay(seu))
 seu[["pca"]]  <-CreateDimReducObject(embeddings = embedding_pca,  key = "PC_",   assay = DefaultAssay(seu))
 toc()
