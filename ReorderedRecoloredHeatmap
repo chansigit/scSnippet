@@ -1,0 +1,14 @@
+Idents(seu)<-"ann0608"
+levels(seu)<-c('celltype1','celltype2','celltype3','celltype4')
+
+
+options(repr.plot.height=8, repr.plot.width=20)
+genes<-c("Batf3","Nfil3","Mycn","Nfkb1","Irf8","Spi1","Bcl11a","Mef2c",
+  "Tcf4","Lmo2","Tsc22d1","Lyl1","Ptma","Runx3","Tox","Tcf7",
+  "Zbtb16","Ikzf2","Gata3","Id2","Tox2","Rora","Lmo4","Ets1",
+  "Rxrg","Maf","Bcl11b","Ikzf3","Flt3","Ccr2","Nrp1","Cd74",
+  "H2-Aa","H2-Ab1","H2-Eb1","H2-DMa")
+
+DoHeatmap(seu, features = genes, group.colors = colormap[levels(seu)],
+           disp.min = -1, disp.max=1,angle=40,
+         draw.lines = F)+ scale_fill_gradientn(colors = c("#3f608c", "white", "#bf3128")) # darkblue and darkred
