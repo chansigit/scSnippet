@@ -1,0 +1,5 @@
+bindata.obs['ann0608'].cat.reorder_categories(['αLP1.8', 'αLP1.9','αLP1.10',
+ 'sEILP1','cEILP','ILCP.1', 'ILCP.2',
+ 'ILC2P.1','ILC2P.2','ILC2P.3','ILC2P.4',
+ 'sEILP2.1', 'sEILP2.2','NKP'
+], inplace = True)
