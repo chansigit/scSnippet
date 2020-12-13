@@ -20,8 +20,8 @@ obs = pd.read_csv("./*_obs.tsv",delimiter='\t',encoding='utf-8')
 adata = ad.AnnData(X, obs=obs, var=var, dtype='int32')
 adata.var_names_make_unique()
 
-adata.obsm["umap"]=np.array(adata.obs[["UMAP_1","UMAP_2"]])
-adata.obsm["pca"]=np.array(adata.obs[["PC_1","PC_2"]])
+adata.obsm["X_umap"]=np.array(adata.obs[["UMAP_1","UMAP_2"]])
+adata.obsm["X_pca"]=np.array(adata.obs[["PC_1","PC_2"]])
 adata
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -61,6 +61,6 @@ var = pd.DataFrame(index=pd.read_csv("./*_var.tsv",delimiter='\t',encoding='utf-
 obs = pd.read_csv("./*_obs.tsv",delimiter='\t',encoding='utf-8')
 adata = ad.AnnData(X, obs=obs, var=var, dtype='int32')
 adata.var_names_make_unique()
-adata.obsm["umap"]=np.array(adata.obs[["UMAP_1","UMAP_2"]])
-adata.obsm["pca"]=np.array(adata.obs[["PC_1","PC_2"]])
+adata.obsm["X_umap"]=np.array(adata.obs[["UMAP_1","UMAP_2"]])
+adata.obsm["X_pca"]=np.array(adata.obs[["PC_1","PC_2"]])
 adata
