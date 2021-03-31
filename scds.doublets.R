@@ -1,3 +1,9 @@
+library(scds)
+library(SingleCellExperiment)
+library(rsvd)
+library(Rtsne)
+library("scater")
+
 sce <- SingleCellExperiment(list(counts=as.matrix(seu@assays$RNA@counts)))
 colData(sce)<-DataFrame(seu@meta.data)
 logcounts(sce) = log1p(counts(sce))
