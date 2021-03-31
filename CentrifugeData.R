@@ -13,12 +13,12 @@ AddAugmentedAssay<- function(seu,
     return(seu)
 }
 
-CentrifugeData <- function(sub){
+CentrifugeData <- function(sub,meta.data.features){
     tic("generating new assay")
     sub <- NormalizeData(sub, normalization.method="LogNormalize", scale.factor=10000)
     sub <- FindVariableFeatures(sub,  selection.method = "vst", nfeatures = 2000)
     sub <- ScaleData(sub, features=VariableFeatures(sub))
-    sub <- AddAugmentedAssay(sub)
+    sub <- AddAugmentedAssay(sub,meta.data.features)
 
     DefaultAssay(sub)<-"AugRNA"
     sub <- RunPCA(sub,  npcs=30, features=VariableFeatures(sub,assay="AugRNA"),verbose=FALSE)
