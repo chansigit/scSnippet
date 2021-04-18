@@ -46,9 +46,6 @@ toc()
 
 
 tic("writing dge,var,obs")
-dge <- t(as.matrix(GetAssayData(seu, assay = "RNA", slot = "counts")))
-var <- colnames(dge)
-obs <- seu@meta.data
 write.table(dge, sep = "\t", row.names =T, col.names = T, file=paste(sample, "_dge.tsv" ,sep=""))
 write.table(var, sep = "\t" ,row.names =F, col.names = F, file=paste(sample, "_var.tsv" ,sep=""))
 write.table(obs, sep = "\t", row.names =T, col.names = T, file=paste(sample, "_obs.tsv" ,sep=""))
