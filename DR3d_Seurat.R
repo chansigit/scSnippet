@@ -1,3 +1,4 @@
+# Old version
 selected.genes<-c("Flt3","Id2","Zbtb16","Irf8")
 expression<-as.data.frame(t(seu.imputed@assays$alra@data[selected.genes,]))
 
@@ -24,3 +25,27 @@ labs_3D(theta=theta, phi=phi,
         hjust=c(1,0,0), vjust=c(1.5,1,-.2),
         labs=c("PC1", "PC2", "PC3")) +
 theme_void()
+
+# New version
+seu = RunUMAP(seu, dims = 1:20, n.components = 3L, reduction.name = "umap3d", verbose=FALSE)
+
+# feature plot
+o(20,20)
+library(plotly)
+dim1 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_1"] #c(0.04499301	,2,3)
+dim2 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_2"]#c(1.93572454,  1.3,4)
+dim3 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_3"] #c(-2.129847,   4,5.5)
+plot_ly(x=as.vector(dim1), y=as.vector(dim2), z=as.vector(dim3), 
+        color=seu@assays$RNA@data["CD8A",],
+        type="scatter3d",
+        mode="markers",size=0.1)
+
+# dimplot
+library(plotly)
+dim1 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_1"] #c(0.04499301	,2,3)
+dim2 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_2"]#c(1.93572454,  1.3,4)
+dim3 <-(seu@reductions$umap3d@cell.embeddings)[,"umap3d_3"] #c(-2.129847,   4,5.5)
+plot_ly(x=as.vector(dim1), y=as.vector(dim2), z=as.vector(dim3), 
+        color=seu@meta.data$RNA_snn_res.0.7,
+        type="scatter3d",
+        mode="markers",size=0.1)
