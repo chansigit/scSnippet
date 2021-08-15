@@ -1,15 +1,12 @@
 conda install -c conda-forge r-base=4.1.1 r-cairo r-hdf5r libgit2  r-stringi r-curl r-rsqlite
 #conda install -c conda-forge r-cairo r-hdf5r libgit2  r-stringi r-curl r-rsqlite
 
-install.packages(c("Rcpp","devtools","tidyverse","ggpubr","Seurat","tictoc"))
-
-pip install jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator anndata scanpy scvelo episcanpy
-jupyter contrib nbextension install –user
-jupyter nbextensions_configurator enable –user
-
+install.packages(c("tictoc","Rcpp","devtools","tidyverse","ggpubr","Seurat","IRkernel",'pheatmap',"SoupX))
 
 conda install -y -c anaconda cytoolz
-pip install pyscenic
+pip install jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator anndata scanpy scvelo episcanpy pyscenic
+jupyter contrib nbextension install –user
+jupyter nbextensions_configurator enable –user
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
@@ -19,7 +16,7 @@ BiocManager::install(c("limma","multtest",
     "SummarizedExperiment","SingleCellExperiment",
     "GenomicRanges","scRNAseq","Rhdf5lib","DropletUtils","scater","dittoSeq",
     "SingleR","AUCell","GSVA","ComplexHeatmap","AnnotationHub","celldex","EnhancedVolcano",
-    "clusterProfiler","ChIPseeker","ChIPpeakAnno"))
+    "clusterProfiler","ChIPseeker","ChIPpeakAnno","scds"))
 
 devtools::install_git("https://gitee.com/chansigit/liger.git")
 devtools::install_git("https://gitee.com/chansigit/seurat-wrappers.git")
