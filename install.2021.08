@@ -18,7 +18,7 @@ BiocManager::install(version = "3.13")
 BiocManager::install(c("limma","multtest",
     "SummarizedExperiment","SingleCellExperiment",
     "GenomicRanges","scRNAseq","Rhdf5lib","DropletUtils","scater","dittoSeq",
-    "SingleR","AUCell","GSVA","ComplexHeatmap","AnnotationHub","celldex",
+    "SingleR","AUCell","GSVA","ComplexHeatmap","AnnotationHub","celldex","EnhancedVolcano",
     "clusterProfiler","ChIPseeker","ChIPpeakAnno"))
 
 devtools::install_git("https://gitee.com/chansigit/liger.git")
