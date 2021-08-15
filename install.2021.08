@@ -1,7 +1,7 @@
 conda install -c conda-forge r-base=4.1.1
 conda install -c conda-forge r-cairo r-hdf5r libgit2  r-stringi r-curl r-rsqlite
 
-install.packages(c("Rcpp","devtools","tidyverse","ggpubr","Seurat"))
+install.packages(c("Rcpp","devtools","tidyverse","ggpubr","Seurat","tictoc"))
 
 pip install jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator anndata scanpy scvelo episcanpy
 jupyter contrib nbextension install –user
