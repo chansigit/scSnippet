@@ -5,8 +5,8 @@ install.packages(c("tictoc","Rcpp","devtools","tidyverse","ggpubr","Seurat","IRk
 
 conda install -y -c anaconda cytoolz
 pip install jupyterlab jupyter_contrib_nbextensions jupyter_nbextensions_configurator anndata scanpy scvelo episcanpy pyscenic
-jupyter contrib nbextension install –user
-jupyter nbextensions_configurator enable –user
+jupyter contrib nbextension install --user
+jupyter nbextensions_configurator enable --user
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
