@@ -1,0 +1,10 @@
+library(BiocParallel)
+# suggested: 6-9 cores for 3.5k cells
+tic('8 core baseline')
+pred.ABM <- SingleR(test= GetAssayData(ABM, slot="data"),
+                ref = reference, 
+                labels = reference$label.cl.reduced,
+                BPPARAM = MulticoreParam(workers=8)
+               )%>% as.data.frame
+
+toc()
