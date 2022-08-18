@@ -1,0 +1,25 @@
+# updated version
+library(ggpubr)
+
+
+gene<-'Rnf2'
+
+o(12,6)
+
+############################## all region ###################################
+p=VlnPlot(seurat, pt.size=0.01, features =gene, split.by='age_diet', sort='increasing',
+          group.by='ann220602')
+plot.data <- p$data
+colnames(plot.data) <- c('expr','cell.type','group')
+ggviolin(plot.data, title=gene, xlab="", ylab='norm expr (all)', # change
+         facet.by ='cell.type', ncol=9,
+         x ="group", y='expr', ylim = c(0, 4.5),
+         trim=T, add = c("jitter"),
+         color = "group", palette = "jco", 
+         add.params = list(size = 0.001, alpha = 0.1),
+         position = position_dodge(0.8))+ rotate_x_text(90)+ 
+    stat_summary(fun=median, geom="point",shape=23, size=2, color="red")+
+    stat_compare_means(label = c("p.signif"), method = "t.test",
+                       comparisons = list(c('old_HFHF','old_normal'),
+                                      c('old_normal','young_normal'),
+                                      c('old_HFHF','young_normal')))+NoLegend()
