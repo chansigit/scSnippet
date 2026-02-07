@@ -1,6 +1,6 @@
 # scSnippet
 
-My own code repository for single-cell analysis. 
+A hub for code snippets for single-cell data analysis. 
 
 # Use
 
